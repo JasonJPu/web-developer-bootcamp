@@ -1,9 +1,21 @@
 h1 {
-  color: red;
+  color: #c85050;
+  background: #e9c64b;
+  /*border-color: purple;
+  border-width: 5px;
+  border-style: solid;*/
+
+  border: 2px solid rgb(60, 148, 140)
 }
 li {
-  color: green;
+  color: rgb(89, 0, 155);
 }
 h4 {
-  color: blue;
+  color: rgba(100, 200, 100, 0.5);
+}
+
+body {
+  /*background: url(https://s-media-cache-ak0.pinimg.com/736x/28/f2/90/28f2903d018b6dd9d9fc366cd11c4d98.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;*/
 }
