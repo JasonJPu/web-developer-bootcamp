@@ -1,0 +1,45 @@
+/*Element*/
+li {
+
+}
+
+/*class*/
+.hello {
+
+}
+
+/*id*/
+/*must be unique to each element, cannot be used for multiple elements*/
+#name {
+
+}
+
+/*star*/
+/*applies to every element*/
+* {
+
+}
+
+/*Descendant selector*/
+ul li .hello {
+
+}
+
+/*Adjacent selector*/
+h4 + ul {
+
+}
+
+/*Attribute selector*/
+a[href="http://www.google.com"] {
+
+}
+
+input[type="text"] {
+
+}
+
+/*nth of type*/
+ul:nth-of-type(3){
+
+}
