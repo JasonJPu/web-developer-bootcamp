@@ -1,0 +1,26 @@
+h1 {
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+}
+
+td {
+  width: 100px;
+  height: 100px;
+}
+
+/*Middle column*/
+td:nth-of-type(2) {
+  padding: 100px 100px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+/*Middle row*/
+tr:nth-of-type(2) td {
+  padding: 100px 100px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
