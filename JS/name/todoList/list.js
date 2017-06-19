@@ -1,12 +1,33 @@
 var todos = [];
 var input = prompt("What would you like to do?");
 
+function listTodo() {
+  console.log("**********")
+  todos.forEach(function (todo, index) {
+    console.log(index + ": " + todo);
+  });
+  console.log("**********");
+}
+
+function addTodo() {
+  var newTodo = prompt("Enter new todo");
+  todos.push(newTodo);
+  console.log("Added todo");
+}
+
+function deleteTodo() {
+  var index = prompt("Enter index of todo to delete");
+  todos.splice(index, 1);
+  console.log("Deleted todo");
+}
+
 while (input !== "quit") {
   if (input === "list") {
-    console.log(todos);
+    listTodo();
   } else if (input === "new") {
-    var newTodo = prompt("Enter new todo");
-    todos.push(newTodo);
+    addTodo();
+  } else if (input === "delete") {
+    deleteTodo();
   }
 
   input = prompt("What would you like to do?");
