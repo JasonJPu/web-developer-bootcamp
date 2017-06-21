@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Color Changer</title>
+    <style>
+      .purple {
+        background: purple;
+      }
+    </style>
+  </head>
+  <body>
+    <button>CLICK ME</button>
+  </body>
+
+  <script>
+    var button = document.querySelector("button");
+    var body = document.querySelector("body");
+    button.addEventListener("click", function () {
+      body.classList.toggle("purple");
+    });
+  </script>
+</html>
