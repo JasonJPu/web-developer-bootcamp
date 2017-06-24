@@ -185,6 +185,11 @@
         for (var i = 0; i < circles.length; i++) {
           circles[i].fillColor.hue += 1;
           circles[i].scale(0.9);
+          // Check if circles have area less than 1, and remove these
+          if (circles[1].radius < 1) {
+            circles[i].remove();
+            circles.splice(i, 1);
+          }
         }
       }
 
