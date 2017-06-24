@@ -17,6 +17,8 @@ $("input[type='text']").on("keypress", (event) => {
     let input = $(event.currentTarget).val();
     $(event.currentTarget).val("");
     $("ul").append("<li><span><i class='fa fa-trash'<i></i></span> " + input + "</li>");
+    $("ul li").last().fadeOut(0);
+    $("ul li").last().fadeIn(500);
   }
 });
 
