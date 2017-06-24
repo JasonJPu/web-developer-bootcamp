@@ -6,32 +6,33 @@ app.get("/", (req, res) => {
   res.send("Hi there, welcome to my ssignment!");
 });
 
+const sound = {
+  pig: "Oink",
+  cow: "Moo",
+  dog: "Woof Woof!",
+  cat: "Meow",
+  sheep: "Baaaaa",
+};
+
 app.get("/speak/:animal", (req, res) => {
-  const animal = req.params.animal;
-  if (animal === "pig") {
-    res.send("The pig says 'Oink'");
-  } else if (animal === "cow") {
-    res.send("The cow says 'Moo'");
-  } else if (animal === "dog") {
-    res.send("The dog says 'Woof Woof!'");
+  const animal = req.params.animal.toLowerCase();
+  if (sound[animal]) {
+    res.send("The " + animal + " says '" + sound[animal] + "'");
   } else {
+    console.log(sound[animal]);
+    console.log(animal);
     res.send("Sorry, page not found...What are you doing with your life?");
   }
 });
 
-app.get("/repeat/hello/:num", (req, res) => {
-  const num = req.params.num;
-  if (num === "3") {
-    res.send("hello hello hello");
-  } else if (num === "5") {
-    res.send("hello hello hello hello hello");
-  } else {
-    res.send("Sorry, page not found...What are you doing with your life?");
+app.get("/repeat/:message/:num", (req, res) => {
+  const message = req.params.message;
+  const num = Number(req.params.num);
+  let result = "";
+  for (let i = 0; i < num; i++) {
+    result += message + " ";
   }
-});
-
-app.get("/repeat/blah/2", (req, res) => {
-  res.send("blah blah");
+  res.send(result);
 });
 
 app.get("*", (req, res) => {
