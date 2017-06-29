@@ -40,7 +40,7 @@ const User = mongoose.model("User", userSchema);
 //         if (err) {
 //           console.log(err);
 //         } else {
-//           console.log(data);
+//           console.log(data);pus
 //         }
 //       });
 //     }
@@ -48,4 +48,12 @@ const User = mongoose.model("User", userSchema);
 // });
 
 // Find user
+User.findOne({ email: "Bob@gmail.com" }).populate("posts").exec((err, user) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(user);
+  }
+});
+
 // Find all posts for that user
