@@ -9,7 +9,7 @@
         <span><%= blog.created.toDateString() %></span>
       </div>
       <div class="description">
-        <p><%= blog.body %></p>
+        <p><%- blog.body %></p>
       </div>
       <a class="ui orange basic button" href="/blogs/<%= blog._id %>/edit">Edit</a>
       <form class="delete" action="/blogs/<%= blog._id %>?_method=delete" method="post">

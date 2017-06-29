@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const expressSanitizer = require("express-sanitizer");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 
 //MONGOOSE MODEL CONFIG
 const blogSchema = new mongoose.Schema({
@@ -45,6 +47,7 @@ app.get("/blogs/new", (req, res) => {
 
 // CREATE ROUTE
 app.post("/blogs", (req, res) => {
+  req.body.blog.body = req.sanitize(req.body.blog.body);
   // create blog
   Blog.create(req.body.blog, (err, newBlog) => {
     if (err) {
@@ -80,6 +83,7 @@ app.get("/blogs/:id/edit", (req, res) => {
 
 // UPDATE ROUTE
 app.put("/blogs/:id", (req, res) => {
+  req.body.blog.body = req.sanitize(req.body.blog.body);
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
     if (err) {
       res.redirect("/blogs");
