@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const path = require("path");
 const Campground = require("./models/campground");
 const Comment = require("./models/comment");
 const seedDB = require("./seeds")
@@ -10,6 +11,7 @@ const app = express();
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "/public")));
 seedDB();
 
 app.get("/", (req, res) => {
