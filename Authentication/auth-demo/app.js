@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const bodyParser = require("body-parser");
-const localStrategy = require("passport-local");
+const LocalStrategy = require("passport-local");
 const passpostLocalMongoose = require("passport-local-mongoose");
 const expressSession = require("express-session");
 const User = require("./models/user");
@@ -22,6 +22,7 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -61,6 +62,14 @@ app.post("/register", (req, res) => {
 // render login form
 app.get("/login", (req, res) => {
   res.render("login");
+});
+
+// login logic
+app.post("/login", passport.authenticate("local", {  // Middleware - run before the callback
+  successRedirect: "/secret",
+  failureRedirect: "/login",
+}), (req, res) => {
+
 });
 
 app.listen(3000, () => {
