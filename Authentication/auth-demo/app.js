@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const passport = require("passport");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const passpostLocalMongoose = require("passport-local-mongoose");
 const expressSession = require("express-session");
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/secret", (req, res) => {
+app.get("/secret", isLoggedIn, (req, res) => {
   res.render("secret");
 });
 
@@ -69,8 +69,19 @@ app.post("/login", passport.authenticate("local", {  // Middleware - run before 
   successRedirect: "/secret",
   failureRedirect: "/login",
 }), (req, res) => {
-
 });
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
+function isLoggedIn(req, res, next) { // next runs next function (express handles this)
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 app.listen(3000, () => {
   console.log("Server started!");
