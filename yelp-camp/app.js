@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const Campground = require("./models/campground");
 const Comment = require("./models/comment");
-const seedDB = require("./seeds")
+const seedDB = require("./seeds");
 
 const app = express();
 
@@ -33,10 +33,10 @@ app.get("/campgrounds", (req, res) => {
 // CREATE -- add new campground to DB
 app.post("/campgrounds", (req, res) => {
   // get data from form and add to campgrounds db
-  let name = req.body.name;
-  let image = req.body.image;
-  let description = req.body.description;
-  let newCampground = { name, image, description };
+  const name = req.body.name;
+  const image = req.body.image;
+  const description = req.body.description;
+  const newCampground = { name, image, description };
   // create a new campground and save to db
   Campground.create(newCampground, (err, newlyCreated) => {
     if (err) {
