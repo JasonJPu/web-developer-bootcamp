@@ -17,6 +17,19 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "/public")));
 seedDB();
 
+// Passport configuration
+app.use(require("express-session")({
+  secret: "It's a secret!",
+  resave: false,
+  saveUninitialized: false,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.get("/", (req, res) => {
   res.render("landing");
 });
@@ -103,6 +116,26 @@ app.post("/campgrounds/:id/comments", (req, res) => {
         }
       })
     }
+  });
+});
+
+// AUTH ROUTES
+// show register form
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+// sign up logic
+app.post("/register", (req, res) => {
+  const newUser = new User({ username: req.body.username });
+  User.register(newUser, req.body.password, (err, user) => {
+    if (err) {
+      console.log(err);
+      return res.render("register");
+    }
+    passport.authenticate("local")(req, res, () => {
+      res.redirect("/campgrounds");
+    });
   });
 });
 
