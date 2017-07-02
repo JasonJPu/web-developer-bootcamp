@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const methodOverride = require("method-override");
 const User = require("./models/user");
 const Campground = require("./models/campground");
 const Comment = require("./models/comment");
@@ -20,6 +21,7 @@ mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(methodOverride("_method"));
 // seedDB(); // seed the database
 
 // Passport configuration
